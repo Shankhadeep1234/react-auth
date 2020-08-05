@@ -11,4 +11,5 @@ module.exports = function (app) {
     res.send("Hi there");
   });
   app.post("/signup", Authentication.signup);
+  app.post("/signin", requireSignin, Authentication.signin);
 };
