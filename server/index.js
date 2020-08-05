@@ -3,10 +3,16 @@ const express = require("express");
 const http = require("http");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
-
-const router = require("./router.js");
+const mongoose = require("mongoose");
 
 const app = express();
+const router = require("./router.js");
+
+//db setup
+mongoose.connect("mongodb://localhost/auth", {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+});
 
 //app setup
 app.use(morgan("combined")); //middleware
