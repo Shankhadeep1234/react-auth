@@ -12,6 +12,7 @@ const router = require("./router.js");
 mongoose.connect("mongodb://localhost/auth", {
   useUnifiedTopology: true,
   useNewUrlParser: true,
+  useCreateIndex: true,
 });
 
 //app setup
