@@ -1,30 +1,28 @@
-//main starting point
+// Main starting point of the application
 const express = require("express");
 const http = require("http");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
+const app = express();
+const router = require("./router");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-const app = express();
-const router = require("./router.js");
-
-//db setup
+// DB Setup
 mongoose.connect("mongodb://localhost/auth", {
-  useUnifiedTopology: true,
   useNewUrlParser: true,
+  useUnifiedTopology: true,
   useCreateIndex: true,
 });
 
-//app setup
-app.use(morgan("combined")); //middleware
-app.use(bodyParser.json({ type: "*/*" })); //middleware
-app.use(cors); //CORS middleware
-router(app); //app routing
+// App Setup
+app.use(morgan("combined"));
+app.use(cors());
+app.use(bodyParser.json({ type: "*/*" }));
+router(app);
 
-//server setup
+// Server Setup
 const port = process.env.PORT || 3090;
 const server = http.createServer(app);
-server.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+server.listen(port);
+console.log("Server listening on:", port);
