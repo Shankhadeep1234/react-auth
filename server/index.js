@@ -4,6 +4,7 @@ const http = require("http");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 const app = express();
 const router = require("./router.js");
@@ -18,6 +19,7 @@ mongoose.connect("mongodb://localhost/auth", {
 //app setup
 app.use(morgan("combined")); //middleware
 app.use(bodyParser.json({ type: "*/*" })); //middleware
+app.use(cors); //CORS middleware
 router(app); //app routing
 
 //server setup
